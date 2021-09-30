@@ -1,0 +1,123 @@
+﻿@model List<deu.Models.Taleps>
+
+
+
+<div class="card card-nav-tabs card-plain">
+    <div class="card-header card-header-danger">
+        <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+        <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                    <li class="nav-item">
+                        <a class="nav-link " onclick="location.href='@Url.Action("Index", "Home")'" data-toggle="tab">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " onclick="location.href='@Url.Action("TalepEkle", "Home")'" data-toggle="tab">Talep Ekle</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="location.href='@Url.Action("TalepListele", "Home")'" data-toggle="tab">Talep Listele</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card-body ">
+        <div class="tab-content text-center">
+            <div class="tab-pane active">
+                <!--Kayıtlar-->
+
+                <div style="text-align: center; padding: 1rem; margin: 1rem;">
+                    <h1 class="title">TALEPLER</h1>
+                    <div style="margin-left:2rem;margin-right:2rem;">
+                        @if (ViewBag.Success != null)
+                        {
+                            <div class="alert alert-success">
+                                <div class="container">
+                                    <div class="alert-icon">
+                                        <i class="material-icons">check</i>
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                                    </button>
+                                    <b>Success Alert:</b> @ViewBag.Success
+                                </div>
+                            </div>
+                        }
+                        @if (ViewBag.Error != null)
+                        {
+                            <div class="alert alert-warning">
+                                <div class="container">
+                                    <div class="alert-icon">
+                                        <i class="material-icons">warning</i>
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                                    </button>
+                                    <b>Warning Alert:</b> @ViewBag.Error
+                                </div>
+                            </div>
+                        }
+                        <div class="clearfix"></div>
+                    </div>
+                    <table class="table table-light table-striped" style="margin:1rem; padding:0.3rem;">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Yazılım </th>
+                                <th scope="col">Satan Firma </th>
+                                <th scope="col">Talep Eden Kurum </th>
+                                <th scope="col">Alım Ücreti</th>
+                                <th scope="col">Alım Tarihi</th>
+                                <th scope="col">Bitiş Tarihi</th>
+                                <th scope="col"><i class="material-icons">email</i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                using (Html.BeginForm(item))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                            <tr class="form">
+                                <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Yazilim.YazilimAdi)</td>
+                                <td>@Html.DisplayFor(modelItem => item.SatanFirma.FirmaAdi)</td>
+                                <td>@Html.DisplayFor(modelItem => item.TalepEdenKurum.KurumAdi)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AlimUcreti)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AlimTarihi)</td>
+                                <td>@Html.DisplayFor(modelItem => item.BitisTarihi)</td>
+
+                                <td>
+                                    @if (item.BitisTarihi.Subtract(DateTime.Now).TotalDays <= 30 && item.BitisTarihi.Subtract(DateTime.Now).TotalDays >= 0)
+                                    {
+
+                                        if (item.MailGonderildiMi)
+                                        {
+                                            <p>Hatırlatma Maili Gönderildi.</p>
+                                        }
+                                        else
+                                        {
+                                            <input type="submit" value="Gönder" class="btn btn-round btn-danger btn-sm" />
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                                }
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+                <!--/Kayıtlar-->
+
+                <div>
+                    <input class="btn  btn-round btn-lg btn-outline-danger" type="button" value="Talep Ekle" onclick="location.href = '@Url.Action("TalepEkle","Home")'" style="float:right; margin-right:2rem;" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

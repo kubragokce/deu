@@ -1,0 +1,97 @@
+﻿@model deu.Models.Taleps
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <!-- Tabs on Plain Card -->
+    <div class="card card-nav-tabs card-plain">
+        <div class="card-header card-header-danger">
+            <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+            <div class="nav-tabs-navigation">
+                <div class="nav-tabs-wrapper">
+                    <ul class="nav nav-tabs" data-tabs="tabs">
+                        <li class="nav-item">
+                            <a class="nav-link " onclick="location.href='@Url.Action("Index", "Home")'" data-toggle="tab">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" onclick="location.href='@Url.Action("TalepEkle", "Home")'" data-toggle="tab">Talep Ekle</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="location.href='@Url.Action("TalepListele", "Home")'" data-toggle="tab">Talep Listele</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card-body ">
+            <div class="tab-content text-center">
+                <div class="tab-pane active">
+                    <div style="text-align:center;padding: 1rem;margin:1rem;">
+                        <h1 class="title">TALEP EKLE</h1>
+                    
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="form-floating col" style="margin:1rem; padding:0.3rem;">
+
+                                    @Html.DropDownList("YazilimId", null, "Seçiniz..", new { @class = "form-select " })
+                                    @Html.LabelFor(model => model.YazilimId, "Yazılım", new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.YazilimId, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-floating col " style="margin:1rem;padding:0.3rem;">
+
+                                    @Html.DropDownList("SatanFirmaId", null, "Seçiniz..", new { @class = "form-select" })
+                                    @Html.LabelFor(model => model.SatanFirmaId, "Satan Firma", new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.SatanFirmaId, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-floating col " style="margin: 1rem; padding: 0.3rem;">
+
+                                    @Html.DropDownList("TalepEdenKurumId", null, "Seçiniz..", new { @class = "form-select" })
+                                    @Html.LabelFor(model => model.TalepEdenKurumId, "Talep Eden Kurum", new { @class = "form-label" })
+                                    @Html.ValidationMessageFor(model => model.TalepEdenKurumId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="form-floating col form-group" style="margin: 1rem; padding: 0.3rem;">
+
+                                    @Html.TextBox("AlimUcreti", null, new { @class = "form-control", Type = "number", step = "any", value = 0, min = 0 })
+                                    @Html.LabelFor(model => model.AlimUcreti, "Alım Ücreti", new { @class = "form-label" })
+                                </div>
+                                <div class="form-floating col form-group" style="margin: 1rem; padding: 0.3rem;">
+                                    @Html.TextBox("AlimTarihi", null, new { @class = "form-control ", type = "datetime-local" })
+                                    @Html.LabelFor(model => model.AlimTarihi, "Alım Tarihi", new { @class = "label-control" })
+                                </div>
+
+                                <div class="form-floating col form-group" style="margin: 1rem; padding: 0.3rem;">
+                                    @Html.TextBox("bitisTarihi", null, new { @class = "form-control ", Type = "datetime-local" })
+                                    @Html.LabelFor(model => model.BitisTarihi, "Bitiş Tarihi", new { @class = "label-control" })
+                                </div>
+                            </div>
+                            <input type="submit" value="Talep Ekle" class="btn btn-round btn-lg btn-danger" style="margin:1rem;" />
+                            <input class="btn btn-round btn-lg btn-outline-danger" type="button" value="Talep Listele" onclick="location.href = '@Url.Action("TalepListele", "Home")'" />
+                        </div>
+                    </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+<script>
+    $('.datetimepicker').datetimepicker({
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down",
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'fa fa-screenshot',
+            clear: 'fa fa-trash',
+            close: 'fa fa-remove'
+        },
+        type: "datetime-local"
+    });
+</script>
+}

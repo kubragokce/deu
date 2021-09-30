@@ -1,0 +1,44 @@
+﻿
+
+
+<div class="card card-nav-tabs card-plain">
+    <div class="card-header card-header-danger">
+        <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+        <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="location.href='@Url.Action("Index", "Home")'" data-toggle="tab">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " onclick="location.href='@Url.Action("TalepEkle", "Home")'" data-toggle="tab">Talep Ekle</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="location.href='@Url.Action("TalepListele", "Home")'" data-toggle="tab">Talep Listele</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card-body ">
+        <div class="tab-content text-center">
+            <div class="tab-pane active">
+                <div style="margin:1rem;padding:1rem; text-align:center;">
+                        <h1 class="title">İŞLEMLER</h1>
+                        <div style="margin:1rem; padding:0.3rem;">
+
+                            <button class="btn btn-primary btn-round btn-lg btn-danger" style="margin:2rem;" onclick="location.href='@Url.Action("TalepEkle", "Home")'">
+                                Talep Ekle
+                            </button>
+                            <button class="btn btn-primary btn-round btn-lg btn-danger" style="margin:2rem;" onclick="location.href='@Url.Action("TalepListele", "Home")'">
+                                Talep Listele
+                            </button>
+                        </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
